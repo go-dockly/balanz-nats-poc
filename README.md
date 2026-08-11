@@ -1,6 +1,6 @@
 # Balanz Energy – NATS JetStream PoC (gRPC + Buf monorepo)
 
-![Project Preview](sherman.jpg)
+![Avatar](assets/sherman.jpg)
 
 https://grok.com/share/bGVnYWN5_b3e05113-1be7-432d-830d-e77aede50e1d
 
@@ -57,17 +57,15 @@ Generated stubs land in `gen/`.
 
 ### Generate & build
 ```bash
-./scripts/run-demo.sh
-# or manually:
-export PATH="/tmp:$PATH"
-buf generate
-go mod tidy
+make generate
 ```
 
 ### Run
 ```bash
 make up
 ```
+
+![Project Preview](assets/demo.png)
 
 You should see the client print accepted readings and the consumer print the corresponding JetStream messages with sequence numbers.
 

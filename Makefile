@@ -6,12 +6,36 @@ SHELL := /usr/bin/env bash
 
 export PATH := /tmp:$(PATH)
 
-.PHONY: all setup generate tidy clean run-nats run-ingest run-consumer run-client info help
+.PHONY: all setup generate tidy clean up down build logs ps client run-nats run-ingest run-consumer run-client info help
 
 all: setup
 
 ## setup: generate stubs, tidy modules, then print how to run everything
 setup: generate tidy info
+
+## up: build (if needed) and start nats, nats-server, ingest-server, consumer
+up:
+	docker compose up -d --build
+
+## down: stop and remove all containers and the nats-data volume
+down:
+	docker compose down -v
+
+## build: (re)build all service images
+build:
+	docker compose build
+
+## logs: tail logs from every running service
+logs:
+	docker compose logs -f
+
+## ps: show status of the compose stack
+ps:
+	docker compose ps
+
+## client: run the one-shot sample-reading client against the running stack
+client:
+	docker compose run --rm client
 
 ## generate: run buf generate to produce protobuf / gRPC stubs
 generate:
@@ -50,23 +74,20 @@ run-client:
 info:
 	@echo ""
 	@echo "============================================================"
-	@echo "  PoC is ready. Start the components in separate terminals:"
+	@echo "  PoC is ready."
 	@echo "============================================================"
 	@echo ""
-	@echo "  1. NATS Server (with JetStream):"
-	@echo "       nats-server -js -m 8222"
+	@echo "  Whole stack, one command:"
+	@echo "       make up            # nats, nats-server, ingest-server, consumer"
+	@echo "       make client        # send sample solar/wind/BESS readings"
+	@echo "       make logs          # tail all service logs"
+	@echo "       make down          # stop and remove everything"
 	@echo ""
-	@echo "  2. NATS Publisher gRPC service:"
-	@echo "       make run-nats      # or: go run ./cmd/nats-server"
-	@echo ""
-	@echo "  3. Ingest gRPC service (calls the publisher):"
-	@echo "       make run-ingest    # or: go run ./cmd/ingest-server"
-	@echo ""
-	@echo "  4. Consumer (prints published readings):"
-	@echo "       make run-consumer  # or: go run ./cmd/consumer"
-	@echo ""
-	@echo "  5. Client (sends sample meter readings):"
-	@echo "       make run-client    # or: go run ./cmd/client"
+	@echo "  Or run components locally against Go (useful while iterating):"
+	@echo "       make run-nats      # go run ./cmd/nats-server"
+	@echo "       make run-ingest    # go run ./cmd/ingest-server"
+	@echo "       make run-consumer  # go run ./cmd/consumer"
+	@echo "       make run-client    # go run ./cmd/client"
 	@echo ""
 	@echo "============================================================"
 

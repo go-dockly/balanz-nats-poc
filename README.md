@@ -1,8 +1,10 @@
 # Balanz Energy – NATS JetStream PoC (gRPC + Buf monorepo)
 
+![Project Preview](sherman.jpg)
+
 https://grok.com/share/bGVnYWN5_b3e05113-1be7-432d-830d-e77aede50e1d
 
-Minimal proof-of-concept that demonstrates the **NATS / JetStream** path for real-time meter data, structured the way the Buf multi-module tutorial lays out: 
+Proof-of-concept that demonstrates the **NATS / JetStream** path for real-time meter data, structured the way this tutorial lays out: 
 [Hands-on Buf Monorepo for Go gRPC: A Multi‑Module Protobuf Architecture](https://medium.com/@cassius.paim/hands-on-buf-monorepo-for-go-grpc-a-multi-module-protobuf-architecture-2fd47d16b6a2)
 
 ## Architecture
@@ -62,22 +64,9 @@ buf generate
 go mod tidy
 ```
 
-### Run (5 terminals)
+### Run
 ```bash
-# 1
-nats-server -js -m 8222
-
-# 2
-go run ./cmd/nats-server
-
-# 3
-go run ./cmd/ingest-server
-
-# 4
-go run ./cmd/consumer
-
-# 5
-go run ./cmd/client
+make up
 ```
 
 You should see the client print accepted readings and the consumer print the corresponding JetStream messages with sequence numbers.

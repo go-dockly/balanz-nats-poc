@@ -1,0 +1,75 @@
+# NOTE on env vars below: NATS_URL / PUBLISHER_ADDR / INGEST_ADDR / gRPC ports
+# are assumed names/defaults for how each service is configured. Rename these
+# to match whatever flags/env vars cmd/*/main.go actually reads.
+
+services:
+  nats:
+    image: nats:2.10-alpine
+    container_name: nats
+    command: ["-js", "-m", "8222"]
+    ports:
+      - "4222:4222"   # client connections
+      - "6222:6222"   # cluster routing (unused here, harmless to expose)
+      - "8222:8222"   # HTTP monitoring / healthz
+    volumes:
+      - nats-data:/data
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8222/healthz"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  nats-server:
+    build:
+      context: .
+      args:
+        SERVICE: nats-server
+    container_name: nats-server
+    depends_on:
+      nats:
+        condition: service_healthy
+    environment:
+      NATS_URL: nats://nats:4222
+      GRPC_ADDR: 0.0.0.0:50051
+    ports:
+      - "50051:50051"
+
+  ingest-server:
+    build:
+      context: .
+      args:
+        SERVICE: ingest-server
+    container_name: ingest-server
+    depends_on:
+      - nats-server
+    environment:
+      PUBLISHER_ADDR: nats-server:50051
+      GRPC_ADDR: 0.0.0.0:50052
+    ports:
+      - "50052:50052"
+
+  consumer:
+    build:
+      context: .
+      args:
+        SERVICE: consumer
+    container_name: consumer
+    depends_on:
+      - nats-server
+    environment:
+      NATS_URL: nats://nats:4222
+
+  client:
+    build:
+      context: .
+      args:
+        SERVICE: client
+    container_name: client
+    profiles: ["client"]   # opt-in: `docker compose run --rm client`
+    depends_on:
+      - ingest-server
+    environment:
+      INGEST_ADDR: ingest-server:50052
+
+volumes:
+  nats-data:

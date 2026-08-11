@@ -24,7 +24,7 @@ const (
 	defaultNATSURL = "nats://localhost:4222"
 	streamName     = "METER_DATA"
 	defaultSubject = "meter.reading"
-	listenAddr     = ":50052"
+	listenAddr     = ":50051"
 )
 
 type publisherServer struct {
@@ -120,6 +120,11 @@ func main() {
 		log.Fatalf("create stream: %v", err)
 	}
 	log.Printf("JetStream stream %q ready", streamName)
+
+	listenAddr := os.Getenv("GRPC_ADDR")
+	if listenAddr == "" {
+		listenAddr = ":50051" // matches docker-compose
+	}
 
 	lis, err := net.Listen("tcp", listenAddr)
 	if err != nil {

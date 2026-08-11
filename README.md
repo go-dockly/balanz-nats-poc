@@ -69,6 +69,8 @@ make up
 
 You should see the client print accepted readings and the consumer print the corresponding JetStream messages with sequence numbers.
 
+![Client Preview](assets/client.png)
+
 ## Why this shape is useful for Balanz
 
 - Real-time meter data arrives via gRPC (or later via MQTT/HTTP adapters that call the same IngestService).

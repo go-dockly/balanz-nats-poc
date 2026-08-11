@@ -19,8 +19,8 @@ import (
 )
 
 const (
-	listenAddr          = ":50051"
-	defaultNATSGRPCAddr = "localhost:50052"
+	defaultListenAddr    = ":50052"
+	defaultPublisherAddr = "localhost:50051"
 )
 
 type ingestServer struct {
@@ -88,9 +88,17 @@ func formatSeq(seq uint64) string {
 }
 
 func main() {
-	natsGRPC := os.Getenv("NATS_GRPC_ADDR")
+	listenAddr := os.Getenv("GRPC_ADDR")
+	if listenAddr == "" {
+		listenAddr = defaultListenAddr
+	}
+
+	natsGRPC := os.Getenv("PUBLISHER_ADDR") // name used by docker-compose
 	if natsGRPC == "" {
-		natsGRPC = defaultNATSGRPCAddr
+		natsGRPC = os.Getenv("NATS_GRPC_ADDR")
+	}
+	if natsGRPC == "" {
+		natsGRPC = defaultPublisherAddr
 	}
 
 	conn, err := grpc.NewClient(natsGRPC, grpc.WithTransportCredentials(insecure.NewCredentials()))

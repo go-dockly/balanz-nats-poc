@@ -15,7 +15,7 @@ import (
 	meterv1 "github.com/go-dockly/balanz-nats-poc/gen/meter/v1"
 )
 
-const defaultIngestAddr = "localhost:50051"
+const defaultIngestAddr = "localhost:50052"
 
 func main() {
 	addr := os.Getenv("INGEST_ADDR")

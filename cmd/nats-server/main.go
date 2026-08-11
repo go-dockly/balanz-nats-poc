@@ -16,8 +16,8 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
-	commonv1 "github.com/balanz-energy/nats-poc/gen/common/v1"
-	natsv1 "github.com/balanz-energy/nats-poc/gen/nats/v1"
+	commonv1 "github.com/go-dockly/balanz-nats-poc/gen/common/v1"
+	natsv1 "github.com/go-dockly/balanz-nats-poc/gen/nats/v1"
 )
 
 const (

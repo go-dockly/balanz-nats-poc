@@ -7,7 +7,7 @@
 package meterv1
 
 import (
-	v1 "github.com/balanz-energy/nats-poc/gen/common/v1"
+	v1 "github.com/go-dockly/balanz-nats-poc/gen/common/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -139,7 +139,7 @@ const file_v1_ingest_service_proto_rawDesc = "" +
 	"message_id\x18\x02 \x01(\tR\tmessageId\x12,\n" +
 	"\x05error\x18\x03 \x01(\v2\x16.common.v1.DomainErrorR\x05error2a\n" +
 	"\rIngestService\x12P\n" +
-	"\rIngestReading\x12\x1e.meter.v1.IngestReadingRequest\x1a\x1f.meter.v1.IngestReadingResponseB8Z6github.com/balanz-energy/nats-poc/gen/meter/v1;meterv1b\x06proto3"
+	"\rIngestReading\x12\x1e.meter.v1.IngestReadingRequest\x1a\x1f.meter.v1.IngestReadingResponseB;Z9github.com/go-dockly/balanz-nats-poc/gen/meter/v1;meterv1b\x06proto3"
 
 var (
 	file_v1_ingest_service_proto_rawDescOnce sync.Once

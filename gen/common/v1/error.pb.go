@@ -81,7 +81,7 @@ const file_v1_error_proto_rawDesc = "" +
 	"\x0ev1/error.proto\x12\tcommon.v1\";\n" +
 	"\vDomainError\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\tR\x04code\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessageB:Z8github.com/balanz-energy/nats-poc/gen/common/v1;commonv1b\x06proto3"
+	"\amessage\x18\x02 \x01(\tR\amessageB=Z;github.com/go-dockly/balanz-nats-poc/gen/common/v1;commonv1b\x06proto3"
 
 var (
 	file_v1_error_proto_rawDescOnce sync.Once

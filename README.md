@@ -1,6 +1,9 @@
 # Balanz Energy – NATS JetStream PoC (gRPC + Buf monorepo)
 
-Minimal proof-of-concept that demonstrates the **NATS / JetStream** path for real-time meter data, structured the same way as the Buf multi-module tutorial you linked.
+https://grok.com/share/bGVnYWN5_b3e05113-1be7-432d-830d-e77aede50e1d
+
+Minimal proof-of-concept that demonstrates the **NATS / JetStream** path for real-time meter data, structured the way the Buf multi-module tutorial lays out: 
+[Hands-on Buf Monorepo for Go gRPC: A Multi‑Module Protobuf Architecture](https://medium.com/@cassius.paim/hands-on-buf-monorepo-for-go-grpc-a-multi-module-protobuf-architecture-2fd47d16b6a2)
 
 ## Architecture
 
@@ -54,6 +57,7 @@ Generated stubs land in `gen/`.
 ```bash
 ./scripts/run-demo.sh
 # or manually:
+export PATH="/tmp:$PATH"
 buf generate
 go mod tidy
 ```

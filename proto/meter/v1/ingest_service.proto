@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package meter.v1;
 
-option go_package = "github.com/balanz-energy/nats-poc/gen/meter/v1;meterv1";
+option go_package = "github.com/go-dockly/balanz-nats-poc/gen/meter/v1;meterv1";
 
 import "v1/error.proto";
 import "v1/meter.proto";

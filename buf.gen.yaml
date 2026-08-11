@@ -5,10 +5,10 @@ plugins:
     out: gen
     opt:
       - paths=import
-      - module=github.com/balanz-energy/nats-poc/gen
+      - module=github.com/go-dockly/balanz-nats-poc/gen
 
   - remote: buf.build/grpc/go
     out: gen
     opt:
       - paths=import
-      - module=github.com/balanz-energy/nats-poc/gen
+      - module=github.com/go-dockly/balanz-nats-poc/gen

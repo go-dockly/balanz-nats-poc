@@ -1,0 +1,41 @@
+# --- Go ---
+/bin/
+/dist/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+go.work
+go.work.sum
+
+# --- Generated protobuf / gRPC stubs (regenerate with `make generate`) ---
+*.pb.go
+*_grpc.pb.go
+*.pb.gw.go
+gen/
+**/gen/
+
+# --- Buf ---
+.buf-cache/
+
+# --- Env / secrets ---
+.env
+.env.*
+*.pem
+*.key
+
+# --- Logs ---
+*.log
+
+# --- OS ---
+.DS_Store
+Thumbs.db
+
+# --- Editors / IDEs ---
+.vscode/
+.idea/
+*.swp
+*.swo

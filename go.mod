@@ -1,4 +1,4 @@
-module github.com/balanz-energy/nats-poc
+module github.com/go-dockly/balanz-nats-poc
 
 go 1.22
 

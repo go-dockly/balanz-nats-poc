@@ -13,9 +13,9 @@ import (
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/status"
 
-	commonv1 "github.com/balanz-energy/nats-poc/gen/common/v1"
-	meterv1 "github.com/balanz-energy/nats-poc/gen/meter/v1"
-	natsv1 "github.com/balanz-energy/nats-poc/gen/nats/v1"
+	commonv1 "github.com/go-dockly/balanz-nats-poc/gen/common/v1"
+	meterv1 "github.com/go-dockly/balanz-nats-poc/gen/meter/v1"
+	natsv1 "github.com/go-dockly/balanz-nats-poc/gen/nats/v1"
 )
 
 const (

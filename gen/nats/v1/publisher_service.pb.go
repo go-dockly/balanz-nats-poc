@@ -7,8 +7,8 @@
 package natsv1
 
 import (
-	v11 "github.com/balanz-energy/nats-poc/gen/common/v1"
-	v1 "github.com/balanz-energy/nats-poc/gen/meter/v1"
+	v11 "github.com/go-dockly/balanz-nats-poc/gen/common/v1"
+	v1 "github.com/go-dockly/balanz-nats-poc/gen/meter/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -157,7 +157,7 @@ const file_v1_publisher_service_proto_rawDesc = "" +
 	"\bsequence\x18\x03 \x01(\x04R\bsequence\x12,\n" +
 	"\x05error\x18\x04 \x01(\v2\x16.common.v1.DomainErrorR\x05error2x\n" +
 	"\x14NatsPublisherService\x12`\n" +
-	"\x13PublishMeterReading\x12#.nats.v1.PublishMeterReadingRequest\x1a$.nats.v1.PublishMeterReadingResponseB6Z4github.com/balanz-energy/nats-poc/gen/nats/v1;natsv1b\x06proto3"
+	"\x13PublishMeterReading\x12#.nats.v1.PublishMeterReadingRequest\x1a$.nats.v1.PublishMeterReadingResponseB9Z7github.com/go-dockly/balanz-nats-poc/gen/nats/v1;natsv1b\x06proto3"
 
 var (
 	file_v1_publisher_service_proto_rawDescOnce sync.Once

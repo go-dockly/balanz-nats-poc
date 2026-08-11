@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package common.v1;
 
-option go_package = "github.com/balanz-energy/nats-poc/gen/common/v1;commonv1";
+option go_package = "github.com/go-dockly/balanz-nats-poc/gen/common/v1;commonv1";
 
 // Domain-level error returned inside responses (not transport-level gRPC status).
 message DomainError {

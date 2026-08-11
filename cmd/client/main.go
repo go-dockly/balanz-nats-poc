@@ -12,7 +12,7 @@ import (
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/protobuf/types/known/timestamppb"
 
-	meterv1 "github.com/balanz-energy/nats-poc/gen/meter/v1"
+	meterv1 "github.com/go-dockly/balanz-nats-poc/gen/meter/v1"
 )
 
 const defaultIngestAddr = "localhost:50051"

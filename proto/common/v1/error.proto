@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package common.v1;
+
+option go_package = "github.com/balanz-energy/nats-poc/gen/common/v1;commonv1";
+
+// Domain-level error returned inside responses (not transport-level gRPC status).
+message DomainError {
+  string code = 1;
+  string message = 2;
+}

@@ -66,6 +66,9 @@ run-ingest:
 run-consumer:
 	go run ./cmd/consumer
 
+run-clickhouse-consumer:
+	go run ./cmd/clickhouse-consumer
+
 ## run-client: send sample solar/wind/BESS readings
 run-client:
 	go run ./cmd/client
@@ -86,7 +89,7 @@ info:
 	@echo "  Or run components locally against Go (useful while iterating):"
 	@echo "       make run-nats      # go run ./cmd/nats-server"
 	@echo "       make run-ingest    # go run ./cmd/ingest-server"
-	@echo "       make run-consumer  # go run ./cmd/consumer"
+	@echo "       make run-consumer  # go run ./cmd/consumer/dummy"
 	@echo "       make run-client    # go run ./cmd/client"
 	@echo ""
 	@echo "============================================================"

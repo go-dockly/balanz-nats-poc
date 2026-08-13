@@ -8,8 +8,8 @@ import (
 	"os"
 	"os/signal"
 	"syscall"
-	"time"
 
+	"github.com/go-dockly/balanz-nats-poc/pkg/util"
 	"github.com/nats-io/nats.go"
 	"github.com/nats-io/nats.go/jetstream"
 )
@@ -28,28 +28,22 @@ func main() {
 
 	nc, err := nats.Connect(natsURL, nats.Name("balanz-meter-consumer"))
 	if err != nil {
-		log.Fatalf("connect: %v", err)
+		log.Fatalf("nats.Connect: %v", err)
 	}
 	defer nc.Close()
 
 	js, err := jetstream.New(nc)
 	if err != nil {
-		log.Fatalf("jetstream: %v", err)
+		log.Fatalf("jetstream.New: %v", err)
 	}
 
 	ctx := context.Background()
 
 	// Wait a moment for the stream to exist (created by nats-server).
-	var stream jetstream.Stream
-	for i := 0; i < 20; i++ {
-		stream, err = js.Stream(ctx, streamName)
-		if err == nil {
-			break
-		}
-		time.Sleep(500 * time.Millisecond)
-	}
+	stream, err := util.WaitForStream(ctx, js, streamName)
 	if err != nil {
-		log.Fatalf("stream %q not found: %v (start nats-server first)", streamName, err)
+		log.Fatalf("util.WaitForStream: %v", err)
+		return
 	}
 
 	cons, err := stream.CreateOrUpdateConsumer(ctx, jetstream.ConsumerConfig{
@@ -59,7 +53,7 @@ func main() {
 		DeliverPolicy: jetstream.DeliverNewPolicy,
 	})
 	if err != nil {
-		log.Fatalf("consumer: %v", err)
+		log.Fatalf("stream.CreateOrUpdateConsumer: %v", err)
 	}
 
 	log.Printf("consuming from stream %q subject meter.reading ...", streamName)
@@ -85,7 +79,7 @@ func main() {
 		_ = msg.Ack()
 	})
 	if err != nil {
-		log.Fatalf("consume: %v", err)
+		log.Fatalf("cons.Consume: %v", err)
 	}
 	defer cc.Stop()
 

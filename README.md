@@ -1,4 +1,4 @@
-# Balanz Energy – NATS JetStream PoC (gRPC + Buf monorepo)
+# Balanz Energy – NATS JetStream Clickhouse PoC (gRPC + Buf monorepo)
 
 ![Avatar](assets/sherman.jpg)
 
@@ -25,7 +25,7 @@ Proof-of-concept that demonstrates the **NATS / JetStream** path for real-time m
                                                                             │
                                                                             ▼
                                                                    ┌─────────────────┐
-                                                                   │  Consumer       │
+                                                                   │  Consumers       │
                                                                    │  (cmd/consumer) │
                                                                    └─────────────────┘
 ```
@@ -65,11 +65,15 @@ make generate
 make up
 ```
 
-![Project Preview](assets/demo.png)
+![Project Preview](assets/nats.png)
 
-You should see the client print accepted readings and the consumer print the corresponding JetStream messages with sequence numbers.
+You should see the client print accepted readings and the consumer print the corresponding JetStream messages with sequence numbers:
 
 ![Client Preview](assets/client.png)
+
+Inspect the clickhouse database to see those readings persisted:
+
+![Clickhouse Preview](assets/clickhouse.png)
 
 ## Why this shape is useful for Balanz
 

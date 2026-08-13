@@ -39,7 +39,7 @@ func main() {
 	for i := 0; i < 5; i++ {
 		asset := assets[rand.Intn(len(assets))]
 		power := 50 + rand.Float64()*200 // 50-250 kW
-		energy := power * 0.25           // rough 15-min interval
+		energy := power * 0.25           // 15-min interval
 
 		req := &meterv1.IngestReadingRequest{
 			Reading: &meterv1.MeterReading{

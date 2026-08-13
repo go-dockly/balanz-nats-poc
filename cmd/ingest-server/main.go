@@ -39,7 +39,7 @@ func (s *ingestServer) IngestReading(ctx context.Context, req *meterv1.IngestRea
 		}, nil
 	}
 
-	// Call the dedicated NATS publisher service over gRPC.
+	// Call the dedicated NATS publisher service over gRPC
 	pubResp, err := s.natsClient.PublishMeterReading(ctx, &natsv1.PublishMeterReadingRequest{
 		Reading: req.Reading,
 		Subject: "meter.reading",
@@ -93,7 +93,7 @@ func main() {
 		listenAddr = defaultListenAddr
 	}
 
-	natsGRPC := os.Getenv("PUBLISHER_ADDR") // name used by docker-compose
+	natsGRPC := os.Getenv("PUBLISHER_ADDR")
 	if natsGRPC == "" {
 		natsGRPC = os.Getenv("NATS_GRPC_ADDR")
 	}

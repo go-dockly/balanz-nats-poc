@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-// ConnParams holds the resolved connection settings for clickhouse-go.
+// ConnParams holds the resolved connection settings for clickhouse-go
 type ConnParams struct {
 	Addr     string // host:port
 	Database string
@@ -20,7 +20,7 @@ type ConnParams struct {
 //   - clickhouse://user:pass@host:9000/dbname?secure=true
 //   - clickhouses://user:pass@host:9440/dbname   (implies TLS)
 //   - a bare host:port (e.g. "localhost:9000"), in which case
-//     database/username/password fall back to the provided defaults.
+//     database/username/password fall back to the provided defaults
 func ParseDSN(dsn, defaultDB, defaultUser, defaultPass string) (ConnParams, error) {
 	p := ConnParams{
 		Database: defaultDB,
@@ -28,8 +28,8 @@ func ParseDSN(dsn, defaultDB, defaultUser, defaultPass string) (ConnParams, erro
 		Password: defaultPass,
 	}
 
-	// Bare "host:port" (no scheme) — url.Parse would otherwise mis-parse
-	// the host as a scheme when a colon is present, so detect this case first.
+	// Bare "host:port" (no scheme) to avoid url.Parse interpreting
+	// the host as a scheme when colon is present
 	if !strings.Contains(dsn, "://") {
 		p.Addr = dsn
 		return p, nil
@@ -52,7 +52,7 @@ func ParseDSN(dsn, defaultDB, defaultUser, defaultPass string) (ConnParams, erro
 	if u.Host == "" {
 		return p, fmt.Errorf("clickhouse dsn missing host: %q", dsn)
 	}
-	p.Addr = u.Host // includes port if present, e.g. "host:9000"
+	p.Addr = u.Host // includes port if present eg "host:9000"
 
 	if u.User != nil {
 		if uname := u.User.Username(); uname != "" {

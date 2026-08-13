@@ -48,8 +48,7 @@ func (s *publisherServer) PublishMeterReading(ctx context.Context, req *natsv1.P
 		subject = defaultSubject
 	}
 
-	// Serialize as JSON for the PoC. Production would typically use protobuf bytes
-	// or a well-defined envelope with schema versioning.
+	// TODO: use protobuf bytes
 	payload, err := json.Marshal(map[string]interface{}{
 		"asset_id":        req.Reading.AssetId,
 		"meter_id":        req.Reading.MeterId,
@@ -123,7 +122,7 @@ func main() {
 
 	listenAddr := os.Getenv("GRPC_ADDR")
 	if listenAddr == "" {
-		listenAddr = ":50051" // matches docker-compose
+		listenAddr = ":50051" // TODO: move
 	}
 
 	lis, err := net.Listen("tcp", listenAddr)

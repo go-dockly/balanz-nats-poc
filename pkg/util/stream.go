@@ -7,6 +7,7 @@ import (
 	"github.com/nats-io/nats.go/jetstream"
 )
 
+// TODO: move to jetstream service wrapper
 func WaitForStream(ctx context.Context, js jetstream.JetStream, name string) (jetstream.Stream, error) {
 	var lastErr error
 	for i := 0; i < 30; i++ {

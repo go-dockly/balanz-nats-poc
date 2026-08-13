@@ -39,7 +39,7 @@ func main() {
 
 	ctx := context.Background()
 
-	// Wait a moment for the stream to exist (created by nats-server).
+	// Wait a moment for the stream to exist (depends on nats-server)
 	stream, err := util.WaitForStream(ctx, js, streamName)
 	if err != nil {
 		log.Fatalf("util.WaitForStream: %v", err)
@@ -83,6 +83,7 @@ func main() {
 	}
 	defer cc.Stop()
 
+	// TODO: move to ctx package
 	sig := make(chan os.Signal, 1)
 	signal.Notify(sig, syscall.SIGINT, syscall.SIGTERM)
 	<-sig

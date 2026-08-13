@@ -1,7 +1,3 @@
-# NOTE on env vars below: NATS_URL / PUBLISHER_ADDR / INGEST_ADDR / gRPC ports
-# are assumed names/defaults for how each service is configured. Rename these
-# to match whatever flags/env vars cmd/*/main.go actually reads.
-
 services:
   nats:
     image: nats:2.10-alpine
@@ -9,8 +5,8 @@ services:
     command: ["-js", "-m", "8222"]
     ports:
       - "4222:4222"   # client connections
-      - "6222:6222"   # cluster routing (unused here, harmless to expose)
-      - "8222:8222"   # HTTP monitoring / healthz
+      - "6222:6222"   # cluster routing
+      - "8222:8222"   # healthz
     volumes:
       - nats-data:/data
     healthcheck:
@@ -96,7 +92,7 @@ services:
       args:
         SERVICE: client
     container_name: client
-    profiles: ["client"]   # opt-in: `docker compose run --rm client`
+    profiles: ["client"]
     depends_on:
       - ingest-server
     environment:

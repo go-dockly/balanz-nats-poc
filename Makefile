@@ -1,6 +1,4 @@
 # Makefile for the meter-readings PoC
-# Assumes this file lives at the repo root (same level as proto/, cmd/, go.mod).
-
 SHELL := /usr/bin/env bash
 .SHELLFLAGS := -euo pipefail -c
 
